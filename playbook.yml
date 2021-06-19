@@ -1,11 +1,9 @@
 ---
-- name: Pull docker image from ECR
+- name: Pull and start docker image from ECR
   hosts: all
   become: yes
 
   tasks:
-  - name: Ping servers
-    ping:
 
   - name: login
     ansible.builtin.shell:
@@ -21,7 +19,7 @@
 
   - name: Start container
     ansible.builtin.shell:
-      cmd: docker run --name=rails-app{{ build_number }} -d --publish 80:3000 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
+      cmd: docker run --name=rails-app -d --publish 80:3000 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
   
   - name: Container restart policy
     ansible.builtin.shell:
