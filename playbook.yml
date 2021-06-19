@@ -8,7 +8,9 @@
   - name: login
     ansible.builtin.shell:
       cmd: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 996548385171.dkr.ecr.eu-central-1.amazonaws.com
-
+  - name: deleting all containers
+    ansible.builtin.shell: 
+      cmd: docker rm -f $(docker ps -a -q)
   - name: Pull
     ansible.builtin.shell:
       cmd: docker pull 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
@@ -16,10 +18,6 @@
   - name: Stop container
     ansible.builtin.shell:
       cmd: docker stop rails-app || exit 0 
-      
-  - name: deleting all containers
-    ansible.builtin.shell: 
-      cmd: docker rm -f $(docker ps -a -q)
 
   - name: Start container
     ansible.builtin.shell:
