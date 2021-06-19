@@ -16,6 +16,10 @@
   - name: Stop container
     ansible.builtin.shell:
       cmd: docker stop rails-app || exit 0 
+      
+  - name: deleting all containers
+    ansible.builtin.shell: 
+      cmd: docker rm -f $(docker ps -a -q)
 
   - name: Start container
     ansible.builtin.shell:
