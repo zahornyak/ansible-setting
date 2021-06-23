@@ -12,20 +12,8 @@
   - name: Pull
     ansible.builtin.shell:
       cmd: docker pull 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
-  
-  - name: Stop container
-    ansible.builtin.shell:
-      cmd: docker stop rails-app || exit 0 
-      
-  - name: remove container
-    ansible.builtin.shell:
-      cmd: docker rm -f rails-app       
-
-      
+   
+    
   - name: Start container
     ansible.builtin.shell:
-      cmd: docker run --name=rails-app -d --publish 80:3000 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
-  
-  - name: Container restart policy
-    ansible.builtin.shell:
-      cmd: docker update --restart unless-stopped $(docker ps -q)
+      cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file /home/ec2-user/docker_compose.yml
