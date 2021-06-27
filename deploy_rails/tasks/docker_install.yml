@@ -23,8 +23,8 @@
 
 - name: install docker
   yum:
-    name: 'docker'
-    state: latest
+    name='docker'
+    state=latest
 
 - name: Enable Docker CE service at startup
   service:
