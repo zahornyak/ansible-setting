@@ -18,28 +18,6 @@
     - lvm2
     - amazon-linux-extras
 
-- name: Ensure Python pip packages are installed
-  pip2:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - boto
-    - boto3
-    - docker-compose
-
-- name: Ensure a list of yum packages are installed
-  yum:
-    name: "{{ packages }}"
-    state: latest
-    update_cache: yes
-  vars:
-    packages:
-    - python-pip
-    - yum-utils
-    - device-mapper-persistent-data
-    - lvm2
-    - amazon-linux-extras
-
 - name: Add extras repository
   shell: yum-config-manager --enable extras
 
