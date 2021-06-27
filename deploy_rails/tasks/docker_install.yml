@@ -4,7 +4,7 @@
     name: '*'
     state: latest
     update_only: yes
-    
+
 - name: Ensure a list of yum packages are installed
   yum:
     name: "{{ packages }}"
@@ -19,7 +19,7 @@
     - amazon-linux-extras
 
 - name: Ensure Python pip packages are installed
-  pip:
+  pip2:
     name: "{{ packages }}"
   vars:
     packages:
