@@ -1,0 +1,46 @@
+---
+- name: Update all packages
+  yum:
+    name: '*'
+    state: latest
+    update_only: yes
+
+- name: Ensure a list of yum packages are installed
+  yum:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+    - python-pip
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - amazon-linux-extras
+
+- name: Add extras repository
+  shell: yum-config-manager --enable extras
+
+- name: install docker
+  yum:
+    name: 'docker'
+    state: latest
+
+- name: Enable Docker CE service at startup
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Ensure Python pip packages are installed
+  pip:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - boto
+    - boto3
+    - docker-compose
+
+- name: Init a new swarm with default parameters
+  community.docker.docker_swarm:
+    state: present

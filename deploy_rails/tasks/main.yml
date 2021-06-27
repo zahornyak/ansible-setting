@@ -1,18 +1,15 @@
 ---
-- name: Pull and start docker image from ECR
-  hosts: all
-  become: yes
+- include_tasks: docker_install.yml
 
-  tasks:
-
-  - name: login
+- name: login
     ansible.builtin.shell:
       cmd: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 996548385171.dkr.ecr.eu-central-1.amazonaws.com
-
-  - name: Pull
+  
+    
+- name: Pull
     ansible.builtin.shell:
       cmd: docker pull 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
     
-  - name: Start container
+- name: Start container
     ansible.builtin.shell:
       cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file /home/ec2-user/docker_compose.yml
