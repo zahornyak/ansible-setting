@@ -3,24 +3,6 @@
   hosts: all
   become: yes
 
+  roles:
+    deploy_railstasks:
   tasks:
-
-  - name: login
-    ansible.builtin.shell:
-      cmd: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 996548385171.dkr.ecr.eu-central-1.amazonaws.com
-
-  - name: Pull
-    ansible.builtin.shell:
-      cmd: docker pull 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:{{ build_number }}
-<<<<<<< HEAD
-    
-  - name: Start container
-    ansible.builtin.shell:
-      cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file /home/ec2-user/docker_compose.yml
-=======
-   
-    
-  - name: Start container
-    ansible.builtin.shell:
-      cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file /home/ec2-user/docker_compose.yml
->>>>>>> cbb9c2660766787ec80650a17d4c687ebc8cd3a3
