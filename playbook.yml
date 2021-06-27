@@ -4,5 +4,5 @@
   become: yes
 
   roles:
-    - deploy_railstasks
+    - deploy_rails
 
