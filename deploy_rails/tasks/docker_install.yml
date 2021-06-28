@@ -18,14 +18,13 @@
     name: docker
     state: started
     enabled: yes
-    
+
 - name: Ensure Python pip packages are installed
   pip:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - docker
+    name:
+      - docker
 
-- name: Init a new swarm with default parameters
-  community.docker.docker_swarm:
-    state: present
+
+- name: Init docker swarm
+  ansible.builtin.shell:
+    cmd: docker swarm init
