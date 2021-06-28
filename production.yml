@@ -3,7 +3,7 @@
   hosts: production
   become: yes
   vars:
-    composedest: docker-compose.yml
+    destgit: production_env
 
   roles:
     - deploy_rails

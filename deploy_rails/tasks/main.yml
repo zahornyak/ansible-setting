@@ -7,6 +7,13 @@
 
 - include_tasks: docker_install.yml
 
+- name: pull from git
+  git:
+    repo: https://github.com/zahornyak/ansible-setting.git
+    dest: /var/lib/jenkins/workspace/{{ destgit }}
+    update: yes
+    version: master
+
 - name: login
   ansible.builtin.shell:
     cmd: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 996548385171.dkr.ecr.eu-central-1.amazonaws.com
@@ -17,4 +24,4 @@
 
 - name: Start container
   ansible.builtin.shell:
-    cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file {{ composedest }}
+    cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file docker-compose.yml
