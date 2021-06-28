@@ -3,7 +3,7 @@
   hosts: production
   become: yes
   vars:
-    composedest: /var/lib/jenkins/workspace/production_env/docker-compose.yml
+    composedest: /production_env/docker-compose.yml
 
   roles:
     - deploy_rails
