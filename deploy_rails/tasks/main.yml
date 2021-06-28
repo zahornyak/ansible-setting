@@ -17,4 +17,4 @@
 
 - name: Start container
   ansible.builtin.shell:
-    cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file docker-compose.yml
+    cmd: BUILD_NUMBER={{ build_number }} docker stack deploy rails-app --compose-file docker_compose.yml
