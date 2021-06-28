@@ -7,18 +7,6 @@
 
 - include_tasks: docker_install.yml
 
-- name: Install git
-  yum:
-    name: git
-    state: latest
-
-- name: pull from git
-  git:
-    repo: https://github.com/zahornyak/ansible-setting.git
-    dest: /home/ec2-user/proj
-    update: yes
-    version: master
-
 - name: login
   ansible.builtin.shell:
     cmd: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 996548385171.dkr.ecr.eu-central-1.amazonaws.com
