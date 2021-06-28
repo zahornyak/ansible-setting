@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:$BUILD_NUMBER
+    env_file:
+      - /home/ec2-user/.env
+    ports:
+      - 80:3000
+      - 443:3000
+    networks:
+      - rails-app
+    deploy:
+      rollback_config:
+        parallelism: 1
+        delay: 0s
+        failure_action: pause
+        monitor: 30s
+        order: start-first
+      restart_policy:
+        condition: any
+        delay: 10s
+        max_attempts: 5
+        window: 30s
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 60s
+        order: start-first
+        failure_action: rollback
+        max_failure_ratio: 0.5
+        monitor: 15s
+
+networks:
+  rails-app:
