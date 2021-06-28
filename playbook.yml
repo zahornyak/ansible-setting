@@ -3,6 +3,9 @@
   hosts: development
   become: yes
 
+  vars:
+    compose-dest: /var/lib/jenkins/workspace/develop_env/docker-compose.yml
+
   roles:
     - deploy_rails
 
