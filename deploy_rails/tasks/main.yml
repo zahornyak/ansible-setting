@@ -1,5 +1,6 @@
 ---
 - include_tasks: docker_install.yml
+- include_tasks: python_install.yml
 
 - name: login
   ansible.builtin.shell:
