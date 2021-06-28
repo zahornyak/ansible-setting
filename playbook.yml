@@ -2,7 +2,8 @@
 - name: Pull and start docker image from ECR
   hosts: development
   become: yes
-  compose-dest: /var/lib/jenkins/workspace/develop_env/docker-compose.yml
+  vars:
+    compose-dest: /var/lib/jenkins/workspace/develop_env/docker-compose.yml
 
   roles:
     - deploy_rails
