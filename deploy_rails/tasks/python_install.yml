@@ -1,12 +1,22 @@
 ---
-- name: Install prerequisites
-  yum: name=python-software-properties state=present
-  become: true
+- name: yum
+  yum: name={{item}} state=latest
+  with_items: "{{ python_yum }}"
 
-- name: Add deadsnakes repo
-  yum_repository: repo="ppa:deadsnakes/ppa"
-  become: true
+- name: unarchive
+  unarchive:
+    src: "{{ python_url }}"
+    dest: "{{ python_tmp }}"
+    remote_src: True
+  register: reg
 
-- name: Install python
-  yum: name="python{{ python_version }}-dev" state=present
-  become: true
+- name: make
+  shell: cd "{{ python_dir }}" && ./configure --prefix=/usr/local/python && make && make install
+
+- file:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    state: link
+  with_items:
+    - { src: '/usr/local/python/bin/python3', dest: '/usr/local/bin/python' }
+    - { src: '/usr/local/python/bin/pip3'   , dest: '/usr/local/bin/pip'    }

@@ -1,4 +1,10 @@
 ---
+- name: configure / Update yum packages
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+
 - include_tasks: python_install.yml
 - include_tasks: docker_install.yml
 
