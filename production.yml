@@ -1,0 +1,7 @@
+---
+- name: Pull and start docker image from ECR
+  hosts: production
+  become: yes
+
+  roles:
+    - deploy_rails
