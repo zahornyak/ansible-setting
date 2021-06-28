@@ -21,4 +21,6 @@
 
 - name: Init docker swarm
   ansible.builtin.shell:
+  ignore_errors: yes
     cmd: docker swarm init
+    
