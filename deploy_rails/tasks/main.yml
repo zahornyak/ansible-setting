@@ -7,6 +7,11 @@
 
 - include_tasks: docker_install.yml
 
+- name: Install git
+  yum:
+    name: git
+    state: latest
+
 - name: pull from git
   git:
     repo: https://github.com/zahornyak/ansible-setting.git
