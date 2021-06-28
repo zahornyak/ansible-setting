@@ -15,7 +15,7 @@
 - name: pull from git
   git:
     repo: https://github.com/zahornyak/ansible-setting.git
-    dest: /var/lib/jenkins/workspace/{{ destgit }}
+    dest: /home/ec2-user
     update: yes
     version: master
 

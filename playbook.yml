@@ -2,8 +2,7 @@
 - name: Pull and start docker image from ECR
   hosts: development
   become: yes
-  vars:
-    destgit: develop_env
+
 
   roles:
     - deploy_rails
