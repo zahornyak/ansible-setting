@@ -1,6 +1,6 @@
 ---
 - name: Pull and start docker image from ECR
-  hosts: all
+  hosts: development
   become: yes
 
   roles:
