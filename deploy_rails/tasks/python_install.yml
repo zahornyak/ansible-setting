@@ -17,22 +17,22 @@
 # make && sudo make altinstall UNINST=1
 - name: download and unpack alternative python3
   unarchive:
-    src: http://www.yourmirror.com/centos/python/Python-3.6.4-binary.tar.gz dest=/tmp/Python-3.6.4-binary.tar.gz
+    src: https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tar.xz dest=/tmp/Python-3.6.8.tar.xz
     dest: /tmp
     remote_src: yes
     keep_newer: yes
-  when: python3_version['stderr'] != 'Python 3.6.4'
+  when: python3_version['stderr'] != 'Python 3.6.8'
   tags:
     - python-alt
 
 # Its possible to install (instead of altinstall) python3 here
 - name: make install alt python3
   make:
-    chdir: /tmp/Python-3.6.4-binary
+    chdir: /tmp/Python-3.6.8-binary
     target: altinstall
     params:
       UNINST: 1  # Replace
-  when: python3_version['stderr'] != 'Python 3.6.4'
+  when: python3_version['stderr'] != 'Python 3.6.8'
   become: yes
   tags:
     - python-alt
