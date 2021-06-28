@@ -15,7 +15,7 @@
 - name: pull from git
   git:
     repo: https://github.com/zahornyak/ansible-setting.git
-    dest: /home/ec2-user
+    dest: /home/ec2-user/proj
     update: yes
     version: master
 
