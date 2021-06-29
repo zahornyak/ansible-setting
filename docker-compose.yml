@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  nginx:
+  ruby:
     image: 996548385171.dkr.ecr.eu-central-1.amazonaws.com/sample-rails-app:$BUILD_NUMBER
     env_file:
       - /home/ec2-user/.env
